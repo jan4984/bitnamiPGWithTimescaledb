@@ -763,7 +763,9 @@ postgresql_execute() {
     local cmd=("$POSTGRESQL_BIN_DIR/psql")
     [[ -n "$db" ]] && args+=("-d" "$db")
     [[ -n "$opts" ]] && args+=("$opts")
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+    if true; then #[[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+	    echo PGPASSWORD=$pass "${cmd[@]}" "${args[@]}"
+		info "PGPASSWORD=$pass ${cmd[@]} ${args[@]}"
         PGPASSWORD=$pass "${cmd[@]}" "${args[@]}"
     elif [[ "${NO_ERRORS:-false}" = true ]]; then
         PGPASSWORD=$pass "${cmd[@]}" "${args[@]}" 2>/dev/null

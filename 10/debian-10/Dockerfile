@@ -21,6 +21,8 @@ RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
+COPY ts/usr/lib/postgresql/10/lib/* /opt/bitnami/postgresql/lib/
+COPY ts/usr/share/postgresql/10/extension/* /opt/bitnami/postgresql/share/extension/
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="postgresql" \

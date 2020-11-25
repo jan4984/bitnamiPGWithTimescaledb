@@ -16,6 +16,7 @@ set -o pipefail
 
 flags=("-D" "$POSTGRESQL_DATA_DIR" "--config-file=$POSTGRESQL_CONF_FILE" "--external_pid_file=$POSTGRESQL_PID_FILE" "--hba_file=$POSTGRESQL_PGHBA_FILE")
 cmd=$(command -v postgres)
+sed -i  "s/shared_preload_libraries =.*/shared_preload_libraries = 'pgaudit,timescaledb'/g" /opt/bitnami/postgresql/conf/postgresql.conf
 
 info "** Starting PostgreSQL **"
 if am_i_root; then
